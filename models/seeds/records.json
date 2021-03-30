@@ -1,0 +1,37 @@
+[
+  {
+    "name": "烏弄 十八胭脂紅玉",
+    "category": "餐飲食品",
+    "categoryIcon": "fas fa-utensils",
+    "date": "2021-03-30",
+    "amount": 30
+  },
+  {
+    "name": "ALPHA Camp 學期三",
+    "category": "其他",
+    "categoryIcon": "fas fa-pen",
+    "date": "2021-03-27",
+    "amount": 36000
+  },
+  {
+    "name": "茶湯會 特級翡翠綠",
+    "category": "餐飲食品",
+    "categoryIcon": "fas fa-utensils",
+    "date": "2021-03-23",
+    "amount": 40
+  },
+  {
+    "name": "八曜和茶 極上307",
+    "category": "餐飲食品",
+    "categoryIcon": "fas fa-utensils",
+    "date": "2021-03-19",
+    "amount": 36
+  },
+  {
+    "name": "光明路加油站 九五無鉛汽油3.89L",
+    "category": "交通出行",
+    "categoryIcon": "fas fa-shuttle-van",
+    "date": "2021-03-15",
+    "amount": 110
+  }
+]
