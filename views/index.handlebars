@@ -1,1 +1,29 @@
-<h1>INDEX TEST</h1>
+<div class="container-fluid p-0">
+  <div class="row col-12 col-md-7 mx-auto px-1 py-4">
+    <section class="col-12" id="record_body">
+      <h3>Total</h3>
+      {{#each records}}
+      <div class="record_body_list">
+        <div class="row">
+          <div class="col-2 text-center my-auto">
+            <i class="{{this.categoryIcon}}" id="record_body_list_category"></i>
+          </div>
+          <div class="col-4">
+            <span>{{this.name}}</span>
+            <span>{{this.date}}</span>
+          </div>
+          <div class="col-4 my-auto text-right">
+            <h4 class="my-auto">$ {{this.amount}}</h4>
+          </div>
+          <div class="col-1 px-0 my-auto text-center">
+            <i class="fas fa-edit"></i>
+          </div>
+          <div class="col-1 pl-0 my-auto text-center">
+            <i class="fas fa-eraser"></i>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </section>
+  </div>
+</div>

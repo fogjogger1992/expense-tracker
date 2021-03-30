@@ -1,0 +1,53 @@
+body{
+	background: #ebecf1;
+	font-family: helvetica;
+	color: #545973;
+}
+
+#record_body{
+	padding-top: 35px;
+}
+
+h3{
+	font-family: calibri;
+	font-weight: 700;
+	color: #1455ae;
+	letter-spacing: 0.5px;
+}
+
+.record_body_list{
+	margin-top: 30px;
+	padding: 20px;
+	box-shadow: 3px 3px 7px -1px rgba(0,0,0,0.3),
+				-3px -3px 7px -1px rgba(255,255,255,1);
+	border-radius: 15px;
+}
+
+.record_body_list i{
+	line-height: 40px;
+	font-size: 18px;
+}
+
+#record_body_list_category{
+	font-size: 25px !important;
+}
+
+.record_body_list span{
+	display: block;
+	margin-left: -5px;
+}
+
+.record_body_list span:first-child{
+	font-size: 17px !important;
+	font-weight: 700;
+}
+
+.record_body_list span:nth-child(2n){
+	font-size: 12px !important;
+}
+
+.record_body_list h4{
+	color: #1455ae;
+	font-size: 22px !important;
+	font-weight: 700;
+}

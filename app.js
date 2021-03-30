@@ -5,8 +5,13 @@ const app = express()
 const mongoose = require('mongoose')
 // handlebars
 const exphbs = require('express-handlebars')
-
+// port
 const PORT = 3000
+// record
+const Record = require('./models/Record')
+
+// static files
+app.use(express.static('public'))
 
 // connection
 mongoose.connect('mongodb://localhost/expense', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -25,8 +30,12 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main', extname: '.handlebars' 
 app.set('view engine', 'handlebars')
 
 // route
+// index
 app.get('/', (req, res) => {
-  res.render('index')
+  Record.find()
+    .lean()
+    .then(records => res.render('index', { records }))
+    .catch(error => console.error(error))
 })
 
 app.listen(PORT, () => {
