@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 // mongoose
 const mongoose = require('mongoose')
+// handlebars
+const exphbs = require('express-handlebars')
 
 const PORT = 3000
 
@@ -18,9 +20,13 @@ db.once('open', () => {
   console.log('mongodb connected')
 })
 
+// view
+app.engine('handlebars', exphbs({ defaultLayout: 'main', extname: '.handlebars' }))
+app.set('view engine', 'handlebars')
+
 // route
 app.get('/', (req, res) => {
-  res.send('expense tracker')
+  res.render('index')
 })
 
 app.listen(PORT, () => {
