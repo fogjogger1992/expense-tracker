@@ -1,10 +1,21 @@
-<<div class="container-fluid p-0">
+<div class="container-fluid p-0">
   <div class="row col-12 col-md-7 mx-auto px-1 py-4">
 
     <section class="col-12" id="record_header">
       <div class="row justify-content-between">
-        <div class="col-9 my-auto">
-          <h3 class="my-0">Total</h3>
+        <div class="col-6 my-auto">
+          <h1 class="my-0">$ {{totalAmount}}</h1>
+        </div>
+        <div class="dropdown col-3 mx-auto px-0 text-right">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            類別
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#each catNames}}
+            <a class="dropdown-item" href="#">{{this}}</a>
+            {{/each}}
+          </div>
         </div>
         <div class="col-2 mx-auto px-0 text-right">
           <i class="fas fa-plus"></i>
@@ -37,4 +48,4 @@
       {{/each}}
     </section>
   </div>
-  </div>
+</div>

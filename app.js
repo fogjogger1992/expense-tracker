@@ -5,12 +5,14 @@ const app = express()
 const mongoose = require('mongoose')
 // handlebars
 const exphbs = require('express-handlebars')
+// dateformat
+const dateFormat = require("dateformat")
 // port
 const PORT = 3000
 // record
 const Record = require('./models/Record')
-// dateformat
-const dateFormat = require("dateformat")
+const Category = require('./models/Category')
+
 
 // static files
 app.use(express.static('public'))
@@ -34,14 +36,26 @@ app.set('view engine', 'handlebars')
 // route
 // index
 app.get('/', (req, res) => {
+  const catNames = []
+  Category.find()
+    .lean()
+    .then(categories => {
+      let totalAmount = 0
+      categories.forEach(item => {
+        catNames.push(item.category)
+      })
+    })
+
   Record.find()
     .lean()
     .then(records => {
+      let totalAmount = 0
       records.forEach(item => {
         const formatDate = dateFormat(item.date, "mmmm dS, yyyy")
         item.date = formatDate
+        totalAmount += item.amount
       })
-      res.render('index', { records })
+      res.render('index', { records, totalAmount, catNames })
     })
     .catch(error => console.error(error))
 })
