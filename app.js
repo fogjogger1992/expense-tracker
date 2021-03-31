@@ -5,6 +5,7 @@ const app = express()
 const mongoose = require('mongoose')
 // handlebars
 const exphbs = require('express-handlebars')
+
 // dateformat
 const dateFormat = require("dateformat")
 // body-parser
@@ -79,8 +80,6 @@ app.post('/records', (req, res) => {
   const { name, date, Category, amount } = req.body
   let [category, categoryIcon] = Category.split('/')
 
-  console.log(Category)
-
   if (Object.values(req.body).indexOf('') === -1) {
     return Record.create({
       name: name,
@@ -95,6 +94,33 @@ app.post('/records', (req, res) => {
     req.flash('warning_msg', '請正確填入所有欄位！')
     res.render('new', { name, date, category, amount })
   }
+})
+
+// edit
+app.get('/records/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .lean()
+    .then(record => res.render('edit', { record }))
+    .catch(error => console.log(error))
+})
+
+app.post('/records/:id/edit', (req, res) => {
+  const id = req.params.id
+  const { name, date, Category, amount } = req.body
+  let [category, categoryIcon] = Category.split('/')
+
+  return Record.findById(id)
+    .then(record => {
+      record.name = name,
+        record.date = date,
+        record.category = category,
+        record.categoryIcon = categoryIcon,
+        record.amount = amount
+      return record.save()
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 app.listen(PORT, () => {

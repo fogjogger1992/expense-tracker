@@ -97,6 +97,18 @@ h1{
 	font-weight: 700;
 }
 
+.record_body_list i{
+	color: #545973;
+}
+
+.fa-edit:hover{
+	color: #3c9c6c;
+}
+
+.fa-eraser:hover{
+	color: #d14152;
+}
+
 #btn_submit{
 	color: #1455ae;
 	height: 45px;
