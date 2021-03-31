@@ -9,6 +9,8 @@ const exphbs = require('express-handlebars')
 const dateFormat = require("dateformat")
 // body-parser
 const bodyParser = require('body-parser')
+// method-override
+const methodOverride = require('method-override')
 // port
 const PORT = 3000
 // record
@@ -37,6 +39,9 @@ app.set('view engine', 'handlebars')
 
 // use body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// use methodOverride
+app.use(methodOverride('_method'))
 
 // route
 const catNames = []
@@ -149,7 +154,7 @@ app.get('/records/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/records/:id/edit', (req, res) => {
+app.put('/records/:id', (req, res) => {
   const id = req.params.id
   const { name, date, Category, amount } = req.body
   let [category, categoryIcon] = Category.split('/')
@@ -168,7 +173,7 @@ app.post('/records/:id/edit', (req, res) => {
 })
 
 // remove
-app.post('/records/:id/delete', (req, res) => {
+app.delete('/records/:id/', (req, res) => {
   const id = req.params.id
   return Record.findById(id)
     .then(record => record.remove())
