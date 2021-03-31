@@ -8,7 +8,7 @@ const routes = require('./routes')
 require('./config/mongoose')
 
 // port
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 // static files
 app.use(express.static('public'))
