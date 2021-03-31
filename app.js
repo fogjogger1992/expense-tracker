@@ -76,32 +76,23 @@ app.get('/records/new', (req, res) => {
 })
 
 app.post('/records', (req, res) => {
-  const { name, date, category, amount } = req.body
+  const { name, date, Category, amount } = req.body
+  let [category, categoryIcon] = Category.split('/')
 
-  const categoryIcon = Category.find()
-    .lean()
-    .then(categories => {
-      categories.forEach(item => {
-        if (item.category === category) {
-          return item.categoryIcon
-        }
-      })
-    })
-
-  console.log(categoryIcon)
-
+  console.log(Category)
 
   if (Object.values(req.body).indexOf('') === -1) {
     return Record.create({
       name: name,
       date: date,
       category: category,
-      categoryIcon: '',
+      categoryIcon: categoryIcon,
       amount: amount
     })
       .then(() => res.redirect('/'))
       .catch(error => console.log(error))
   } else {
+    req.flash('warning_msg', '請正確填入所有欄位！')
     res.render('new', { name, date, category, amount })
   }
 })

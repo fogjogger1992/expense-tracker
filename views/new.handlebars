@@ -22,10 +22,10 @@
         <div class="input-group-prepend">
           <label class="input-group-text" for="inputGroupSelect01">類別 *</label>
         </div>
-        <select class="custom-select" id="inputGroupSelect01" name="category" required>
+        <select class="custom-select" id="inputGroupSelect01" name="Category" required>
           <option selected disabled>選擇...</option>
           {{#each categories}}
-          <option value="{{this.category}}">{{this.category}}</option>
+          <option value="{{this.category}}/{{this.categoryIcon}}">{{this.category}}</option>
           {{/each}}
         </select>
       </div>
