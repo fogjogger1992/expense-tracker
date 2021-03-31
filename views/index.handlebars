@@ -45,7 +45,8 @@
             <a href="./records/{{ this._id }}/edit"><i class="fas fa-edit"></i></a>
           </div>
           <form class="col-1 pl-0 my-auto text-center" action="./records/{{ this._id }}?_method=DELETE" method="POST">
-            <button type="submit" style="border:0px;" onclick="return confirm('確定刪除該筆紀錄？');">
+            <button type="submit" style="border:0px; background-color: Transparent;"
+              onclick="return confirm('確定刪除該筆紀錄？');">
               <i class="fas fa-eraser"></i>
             </button>
           </form>
