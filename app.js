@@ -39,22 +39,24 @@ app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // route
+const catNames = []
 // index
 app.get('/', (req, res) => {
-  const catNames = []
-  Category.find()
+  let totalAmount = 0
+
+  Record.find()
     .lean()
     .then(categories => {
-      let totalAmount = 0
       categories.forEach(item => {
-        catNames.push(item.category)
+        if (catNames.indexOf(item.category) === -1) {
+          catNames.push(item.category)
+        }
       })
     })
 
   Record.find()
     .lean()
     .then(records => {
-      let totalAmount = 0
       records.forEach(item => {
         const formatDate = dateFormat(item.date, "mmmm dS, yyyy")
         item.date = formatDate
@@ -64,6 +66,50 @@ app.get('/', (req, res) => {
     })
     .catch(error => console.error(error))
 })
+
+// filter
+app.get('/records/filter', (req, res) => {
+
+  const filter = req.query.selectedFilter
+  const filteredAmounts = Record.aggregate([
+    { $match: { category: filter } }, {
+      $group: {
+        _id: null,
+        amount: { $sum: "$amount" },
+      }
+    }
+  ]).exec()
+
+  const filteredRecords = Record.aggregate([
+    { $match: { category: filter } },
+    {
+      $project: {
+        name: 1,
+        category: 1,
+        amount: 1,
+        merchant: 1,
+        date: 1,
+        categoryIcon: 1,
+      }
+    }
+  ]).exec()
+
+  if (filter) {
+    Promise.all([filteredAmounts, filteredRecords])
+      .then(([filteredAmounts, records]) => {
+        records.forEach(item => {
+          const formatDate = dateFormat(item.date, "mmmm dS, yyyy")
+          item.date = formatDate
+        })
+        const totalAmount = filteredAmounts[0].amount
+        res.render('index', { totalAmount, records, filter, catNames })
+      })
+  } else {
+    Promise.all([filteredAmounts, filteredRecords])
+      .then(() => res.redirect('/'))
+  }
+})
+
 
 // new
 app.get('/records/new', (req, res) => {

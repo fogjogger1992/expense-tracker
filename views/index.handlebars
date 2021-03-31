@@ -6,21 +6,25 @@
         <div class="col-6 my-auto">
           <h1 class="my-0">$ {{totalAmount}}</h1>
         </div>
-        <div class="dropdown col-3 mx-auto px-0 text-right">
+
+        <form action="/records/filter" class="dropdown col-3 mx-auto px-0 text-right">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            類別
+            篩選類別{{#if filter}} : {{filter}} {{/if}}
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {{#each catNames}}
-            <a class="dropdown-item" href="#">{{this}}</a>
+            <button class="dropdown-item" name="selectedFilter" value="{{this}}" href="#" type="submit"
+              style="box-shadow: none;">{{this}}</button>
             {{/each}}
           </div>
-        </div>
+        </form>
+
         <div class="col-3 text-right">
           <a href="/records/new" class="px-auto"><i class="fas fa-plus"></i></a>
         </div>
       </div>
+
     </section>
 
     <section class="col-12" id="record_body">
