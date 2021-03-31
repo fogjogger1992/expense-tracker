@@ -5,7 +5,6 @@ const app = express()
 const mongoose = require('mongoose')
 // handlebars
 const exphbs = require('express-handlebars')
-
 // dateformat
 const dateFormat = require("dateformat")
 // body-parser
@@ -91,7 +90,6 @@ app.post('/records', (req, res) => {
       .then(() => res.redirect('/'))
       .catch(error => console.log(error))
   } else {
-    req.flash('warning_msg', '請正確填入所有欄位！')
     res.render('new', { name, date, category, amount })
   }
 })
@@ -119,6 +117,15 @@ app.post('/records/:id/edit', (req, res) => {
         record.amount = amount
       return record.save()
     })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+// remove
+app.post('/records/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .then(record => record.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
