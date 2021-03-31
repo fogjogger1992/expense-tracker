@@ -10,7 +10,7 @@
         <form action="/records/filter" class="dropdown col-3 mx-auto px-0 text-right">
           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            篩選類別{{#if filter}} : {{filter}} {{/if}}
+            {{#if filter}} {{filter}} {{else}} 篩選類別 {{/if}}
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {{#each catNames}}
