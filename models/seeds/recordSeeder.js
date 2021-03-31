@@ -8,16 +8,22 @@ const db = mongoose.connection
 
 db.once('open', () => {
   console.log('mongodb connected')
+  const promise = []
 
   for (let i = 0; i < recordList.length; i++) {
-    Record.create({
-      name: recordList[i].name,
-      category: recordList[i].category,
-      categoryIcon: recordList[i].categoryIcon,
-      date: recordList[i].date,
-      amount: recordList[i].amount
-    })
+    promise.push(
+      Record.create({
+        name: recordList[i].name,
+        category: recordList[i].category,
+        categoryIcon: recordList[i].categoryIcon,
+        date: recordList[i].date,
+        amount: recordList[i].amount
+      })
+    )
   }
 
-  console.log('recordSeeder done')
+  Promise.all(promise).then(() => {
+    console.log('recordSeeder done')
+    db.close()
+  })
 })

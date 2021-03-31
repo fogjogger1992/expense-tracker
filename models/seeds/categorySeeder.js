@@ -8,13 +8,19 @@ const db = mongoose.connection
 
 db.once('open', () => {
   console.log('mongodb connected')
+  const promise = []
 
   for (let i = 0; i < categoryList.length; i++) {
-    Category.create({
-      category: categoryList[i].category,
-      categoryIcon: categoryList[i].categoryIcon
-    })
+    promise.push(
+      Category.create({
+        category: categoryList[i].category,
+        categoryIcon: categoryList[i].categoryIcon
+      })
+    )
   }
 
-  console.log('categorySeeder done')
+  Promise.all(promise).then(() => {
+    console.log('catgorySeeder done')
+    db.close()
+  })
 })
