@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const dateFormat = require("dateformat")
 const Record = require('../../models/Record')
+const Category = require('../../models/Category')
 
 const catNames = []
 

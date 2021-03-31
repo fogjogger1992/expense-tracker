@@ -1,13 +1,8 @@
 const Category = require('../Category')
 const categoryList = require('./categories.json')
-
-// mongoose
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/expense', { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
+const db = require('../../config/mongoose')
 
 db.once('open', () => {
-  console.log('mongodb connected')
   const promise = []
 
   for (let i = 0; i < categoryList.length; i++) {
