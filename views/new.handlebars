@@ -1,0 +1,48 @@
+<div class="container-fluid py-4">
+  <h3 class="text-center pt-4" style="font-weight: 700; color: #1455ae;">請輸入您的支出</h3>
+  <div class="row col-12 col-md-7 mx-auto px-1 my-4 py-4">
+    <form class="row col-12" action="/records" method="POST">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">名稱 *</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="name" value="{{name}}" required>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">日期 *</span>
+        </div>
+        <input type="date" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="date" value="{{date}}" required>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">類別 *</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="category" required>
+          <option selected disabled>選擇...</option>
+          {{#each categories}}
+          <option value="{{this.category}}">{{this.category}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">金額 *</span>
+        </div>
+        <input type="number" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="amount" value="amount" required>
+      </div>
+
+      <div class="col-12">
+        <p style="font-size: 12px; color: #d14152;">* 必填欄位</p>
+      </div>
+
+      <input class="btn px-4 my-4 mx-auto" id="btn_submit" type="submit" value="新增支出">
+    </form>
+  </div>
+</div>
