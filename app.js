@@ -9,6 +9,8 @@ const exphbs = require('express-handlebars')
 const PORT = 3000
 // record
 const Record = require('./models/Record')
+// dateformat
+const dateFormat = require("dateformat")
 
 // static files
 app.use(express.static('public'))
@@ -34,7 +36,13 @@ app.set('view engine', 'handlebars')
 app.get('/', (req, res) => {
   Record.find()
     .lean()
-    .then(records => res.render('index', { records }))
+    .then(records => {
+      records.forEach(item => {
+        const formatDate = dateFormat(item.date, "mmmm dS, yyyy")
+        item.date = formatDate
+      })
+      res.render('index', { records })
+    })
     .catch(error => console.error(error))
 })
 

@@ -1,11 +1,25 @@
 body{
 	background: #ebecf1;
-	font-family: helvetica;
+	font-family: helvetica, "Noto Sans TC", sans-serif;
 	color: #545973;
 }
 
-#record_body{
+#record_header {
 	padding-top: 35px;
+}
+
+#record_header i{
+	height: 45px;
+	width: 45px;
+	text-align: center;
+	line-height: 45px;
+	box-shadow: 3px 3px 8px -1px rgba(0,0,0,0.3),
+				-3px -3px 8px -1px rgba(255,255,255,1);
+	border-radius: 8px;
+}
+
+#record_body {
+	padding-top: 15px;
 }
 
 h3{
